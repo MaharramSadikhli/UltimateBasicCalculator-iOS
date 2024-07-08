@@ -13,6 +13,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var secondNumText: UITextField!
     
+    @IBOutlet weak var resultText: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -20,6 +23,15 @@ class ViewController: UIViewController {
     
 
     @IBAction func calculateDotProduct(_ sender: Any) {
+        
+        var firstNum: Double? = Double(Int(firstNumText.text ?? "0") ?? 0)
+        var secondNum: Double? = Double(Int(secondNumText.text ?? "0") ?? 0)
+        print((firstNum ?? 0) / (secondNum ?? 0))
+        
+        resultText.text = String((firstNum ?? 0) / (secondNum ?? 0))
+        
+        
+        
     }
     
     
