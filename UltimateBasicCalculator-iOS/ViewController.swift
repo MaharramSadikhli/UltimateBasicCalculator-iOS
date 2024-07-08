@@ -21,29 +21,68 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    
+    // Converter Strimg to Double
+    func converterToDouble (num: UITextField) -> Double? {
+        
+        return if let text = num.text,
+        let textInt = Double(text) {
+            Double(text)
+        } else {
+            nil
+        }
+    }
+    
+    
+    // Controler for Nullables
+    func controlNums() -> Bool {
+        
+        return if ( converterToDouble(num: firstNumText) != nil && converterToDouble(num: secondNumText) != nil) { true } else { false }
+        
+    }
+    
+    
+    // Getter Operations
+    func getOperation (operation: String) -> String {
+        return if controlNums() {
+            switch operation {
+            case "*":
+                String((converterToDouble(num: firstNumText)!) * (converterToDouble(num: secondNumText)!))
+            case "/":
+                String((converterToDouble(num: firstNumText)!) / (converterToDouble(num: secondNumText)!))
+            case "+":
+                String((converterToDouble(num: firstNumText)!) + (converterToDouble(num: secondNumText)!))
+            case "-":
+                String((converterToDouble(num: firstNumText)!) - (converterToDouble(num: secondNumText)!))
+            default:
+                "zero"
+            }
+        } else {
+            "Invalid Input Type"
+        }
+        
+        
+    }
+    
 
     @IBAction func calculateDotProduct(_ sender: Any) {
-        
-        var firstNum: Double? = Double(Int(firstNumText.text ?? "0") ?? 0)
-        var secondNum: Double? = Double(Int(secondNumText.text ?? "0") ?? 0)
-        print((firstNum ?? 0) / (secondNum ?? 0))
-        
-        resultText.text = String((firstNum ?? 0) / (secondNum ?? 0))
-        
-        
-        
+        resultText.text = getOperation(operation: "*")
     }
     
     
     @IBAction func calculateDivide(_ sender: Any) {
+        resultText.text = getOperation(operation: "/")
     }
     
     
     @IBAction func calculateAddition(_ sender: Any) {
+        resultText.text = getOperation(operation: "+")
     }
     
     
     @IBAction func calculateDifference(_ sender: Any) {
+        resultText.text = getOperation(operation: "-")
     }
     
 }
