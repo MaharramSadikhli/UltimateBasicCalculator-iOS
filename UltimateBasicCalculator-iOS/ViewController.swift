@@ -22,16 +22,24 @@ class ViewController: UIViewController {
     }
     
     
+    func divideZero () -> String {
+        if secondNumText.text == Optional("0"){
+            resultText.font = UIFont.systemFont(ofSize: 15)
+            return "A number is not divisible by 0"
+        } else {
+            resultText.font = UIFont.systemFont(ofSize: 30)
+            return String((converterToDouble(num: firstNumText)!) / (converterToDouble(num: secondNumText)!))
+        }
+    }
+    
     
     // Converter Strimg to Double
     func converterToDouble (num: UITextField) -> Double? {
         
-        return if let text = num.text,
-        let textInt = Double(text) {
-            Double(text)
-        } else {
-            nil
+        if let text = num.text, let doubleValue = Double(text) {
+            return doubleValue
         }
+        return nil
     }
     
     
@@ -43,14 +51,14 @@ class ViewController: UIViewController {
     }
     
     
-    // Getter Operations
+    // Get Operations
     func getOperation (operation: String) -> String {
         return if controlNums() {
             switch operation {
             case "*":
                 String((converterToDouble(num: firstNumText)!) * (converterToDouble(num: secondNumText)!))
             case "/":
-                String((converterToDouble(num: firstNumText)!) / (converterToDouble(num: secondNumText)!))
+                divideZero()
             case "+":
                 String((converterToDouble(num: firstNumText)!) + (converterToDouble(num: secondNumText)!))
             case "-":
